@@ -1,6 +1,6 @@
 import validator from 'validator'
 
-export default class Contato {
+export default class Agricultores {
     constructor(formClass) {
         this.form = document.querySelector(formClass)
     }

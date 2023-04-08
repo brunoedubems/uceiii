@@ -1,0 +1,26 @@
+
+  /* NAVBAR */
+  label{
+    font-size: 20px;
+  }
+  .navmenu, .login{
+    background-image: linear-gradient(#CE9FFC, #7367F0);
+    
+  }
+  
+  .navbar{
+    padding: 0;
+  }
+  .icone{
+    max-width: 150px;
+    max-height: 150px;}
+  
+  
+  .nav-link{
+    font-size: 20px;
+  }
+  
+  .nav-link.active{
+    font-weight: bold;
+  }
+  

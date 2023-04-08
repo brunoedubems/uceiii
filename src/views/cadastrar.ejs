@@ -12,9 +12,9 @@
 <%- include('includes/messages') %>
 
 <% if(agricultores._id) { %> 
-<form action="/agricultores/edit/<%= agricultores._id %>" method="POST" class="needs-validation" novalidate>
+<form action="/cadastrar/edit/<%= agricultores._id %>" method="POST" class="needs-validation" novalidate>
   <% } else { %> 
-    <form action="/agricultores/register" method="POST" class="needs-validation" novalidate> 
+    <form action="/cadastrar/register" method="POST" class="needs-validation" novalidate> 
   <% } %> 
   <input type="hidden" name="_csrf" value=<%= csrfToken %>>
 
@@ -42,6 +42,9 @@
           <label for="endereco">Endereço:*</label>
           <input type="text" value="<%= agricultores.endereco %>" class="form-control" id="endereco" name="endereco" required>
 
+          <label for="numero">Numero:</label>
+          <input type="text" value="<%= agricultores.numero %>" class="form-control" id="numero" name="numero">
+
           <label for="inscricaoEstadual">Inscrição Estadual:*</label>
           <input type="text" value="<%= agricultores.inscricaoEstadual %>" class="form-control" id="inscricaoEstadual" name="inscricaoEstadual">
 
@@ -51,8 +54,6 @@
           <label for="telefone">Telefone*:</label>
           <input type="text" value="<%= agricultores.telefone %>" class="form-control" id="telefone" name="telefone" required>
 
-          <label for="cnae">CNAE:</label>
-          <input type="text" value="<%= agricultores.cnae %>" class="form-control" id="cnae" name="cnae" >
        </div>
     </div>
     <div class="col-md-6">
@@ -78,36 +79,15 @@
 
           <label for="dataMandato">Data do mandatado:</label>
           <input type="text" value="<%= agricultores.dataMandato %>" class="form-control" id="dataMandato" name="dataMandato">
-
-          <label for="numero">Numero:</label>
-          <input type="text" value="<%= agricultores.numero %>" class="form-control" id="numero" name="numero">
+          
+          <label for="cnae">CNAE:</label>
+          <input type="text" value="<%= agricultores.cnae %>" class="form-control" id="cnae" name="cnae" >
 
           <label for="cep">Cep:</label>
           <input type="text" value="<%= agricultores.cep %>" class="form-control" id="cep" name="cep">
        </div>
     </div>
-    <div class="col-md-12 dadosDaInscricao mt-5 ">
-       <h1>DADOS DA INSCRIÇÃO</h1>
-       <h4 class="m-3">Entidade possui inscrição de programas em outro conselho?</h4>
-       <div class="form-group form-check formCheckConselhos">
-         <label class="form-check-label" for="cmca">Conselho Municipal de direitos da criança e adolescente</label>
-          <input type="checkbox" class="form-check-input" id="cmca" value="adolescente" name="adolescente">
-       </div>
-       <div class="form-group form-check formCheckConselhos">
-         <label class="form-check-label" for="cmpi">Conselho Municipal de direitos da pessoa idosa</label>
-          <input type="checkbox" class="form-check-input" id="cmpi" value="idoso" name="idoso">
-       </div>
-    </div>
-    <div class="col-md-12 dadosFinanceiros">
-       <h1>DADOS FINANCEIROS</h1>
-       <div class="form-group col-md-8">
-          <label for="receitaTotal">Valor da receita total da entidade:</label>
-          <input type="text" value="<%= agricultores.receitaTotal %>" class="form-control" id="receitaTotal" name="receitaTotal">
-
-          <label for="fontesDeFinanciamento">Indique as principais fontes de financiamento da entidade:</label>
-          <input type="text" value="<%= agricultores.fontesDeFinanciamento %>" class="form-control" id="fontesDeFinanciamento" name="fontesDeFinanciamento">
-       </div>
-    </div>
+  
     <div class="botoes">
        <button type="submit" class="btn btn-primary col-md-3 mt-3 botaoCadastro">Salvar</button>
        <button class="btn btn-primary col-md-3 mt-3 botaoCadastro" href="/login/index">Cancelar</button>

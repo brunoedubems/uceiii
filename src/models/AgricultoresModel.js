@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-//const validator = require('validator');
+const validator = require('validator');
 
-const ContatoSchema = new mongoose.Schema({
-  cnpjCpf: { type: String, required: false, default: '' },
+const AgricultoresSchema = new mongoose.Schema({
+  cnpjCpf: { type: String, required: true, default: '' }, //true
   nome: { type: String, required: false, default: '' },
   dataDeNascimento: { type: String, required: false, default: '' },
   rg: { type: String, required: false, default: '' },
@@ -20,32 +20,29 @@ const ContatoSchema = new mongoose.Schema({
   dataMandato: { type: String, required: false, default: '' },
   numero: { type: String, required: false, default: '' },
   cep: { type: String, required: false, default: '' },
-  conselho: { type: String, required: false, default: '' },
-  receitaTotal: { type: String, required: false, default: '' },
-  fontesDeFinanciamento: { type: String, required: false, default: '' },
   criadoEm: { type: Date, default: Date.now }
 });
 
-const ContatoModel = mongoose.model('Contato', ContatoSchema);
+const AgricultoresModel = mongoose.model('Agricultores', AgricultoresSchema);
 
-function Contato(body) {
+function Agricultores(body) {
 this.body = body; 
 this.errors = [];
-this.contato = null;
+this.agricultores = null;
 }
 
-Contato.prototype.register = async function() {
+Agricultores.prototype.register = async function() {
   this.valida();
   if(this.errors.length > 0) return;
-  this.contato = await ContatoModel.create(this.body);
+  this.agricultores = await AgricultoresModel.create(this.body);
 };
 
-Contato.prototype.valida = function() {
+Agricultores.prototype.valida = function() {
   this.cleanUp();
-
+if(!this.body.cnpjCpf) this.errors.push("cpf é um campo obrigatorio")
 };
 
-Contato.prototype.cleanUp = function() {
+Agricultores.prototype.cleanUp = function() {
   for(const key in this.body) {
     if(typeof this.body[key] !== 'string') {
       this.body[key] = '';
@@ -58,6 +55,7 @@ Contato.prototype.cleanUp = function() {
     dataDeNascimento: this.body.dataDeNascimento,
     rg: this.body.rg,
     endereco: this.body.endereco,
+    numero: this.body.numero,
     inscricaoEstadual: this.body.inscricaoEstadual,
     email: this.body.email,
     telefone: this.body.telefone,
@@ -69,40 +67,35 @@ Contato.prototype.cleanUp = function() {
     dataDeVisita: this.body.dataDeVisita,
     dataDeAbertura: this.body.dataDeAbertura,
     dataMandato: this.body.dataMandato,
-    numero: this.body.numero,
     cep: this.body.cep,
-    conselho: this.body.conselho,
-    receitaTotal: this.body.receitaTotal,
-    fontesDeFinanciamento: this.body.fontesDeFinanciamento,
-    
       };
     };
 
-Contato.prototype.edit = async function(id){
+Agricultores.prototype.edit = async function(id){
   if(typeof id !== 'string') return;
   this.valida();
   if(this.erros.length > 0) return;
-  this.contato = await ContatoModel.findByIdUpdate(id, this.body, { new: true });
+  this.agricultores = await AgricultoresModel.findByIdUpdate(id, this.body, { new: true });
 };
 
 //metodos estáticos
-Contato.buscaPorId = async function(id) {
+Agricultores.buscaPorId = async function(id) {
   if(typeof id !== 'string') return;
-const contato = await ContatoModel.findById(id);
-return contato;
+const user = await AgricultoresModel.findById(id);
+return user;
 }
 
-Contato.buscaContatos = async function(id) {
-const contatos = await ContatoModel.find()
+Agricultores.busca = async function(id) {
+const agricultores = await AgricultoresModel.find()
 .sort({ criadoEM: -1 });  //1 PARA ORDEM CRESCENTE -- 2 PARA DECRESCENTE
-return contatos;
+return agricultores;
 }
 
-Contato.delete = async function(id) {
+Agricultores.delete = async function(id) {
   if(typeof id !== 'string') return;
-const contato = await ContatoModel.findOneAndDelete({_id: id});
-return contato;
+const agricultores = await AgricultoresModel.findOneAndDelete({_id: id});
+return agricultores;
 }
 
 
-module.exports = Contato;
+module.exports = Agricultores;

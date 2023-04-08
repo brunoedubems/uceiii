@@ -1,32 +1,33 @@
-<nav class="navbar navbar-expand-lg bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="./inicio.html">
-      <img src="../img/LogoCMAS.svg" class="logocmas" alt="logo do cmas" height="70">
+<link rel="stylesheet" href="/css/navbar.css">
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid navmenu">
+    <img src="/img/LogoCMAS.svg" class="logocmas" alt="logo do cmas" height="60">
+    <a class="navbar-brand" href="/">
       </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
      <ul class="navbar-nav ml-auto">
-       
-       
-       <li class="nav-item">
-         <a class="nav-link text-white" href="/login/index">Início</a>
-       </li>
 
-       <li class="nav-item">
-         <a class="nav-link text-white" href="/contato">Cadastrar</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link text-white" href="/buscar">Buscar</a>
-       </li>
     <% if(user) { %>
       <li class="nav-item">
+       <li class="nav-item">
+        <a class="nav-link text-white" href="/login/index">Início</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white" href="/cadastrar">Cadastrar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="/buscar">Buscar</a>
+      </li>
         <a class="nav-link text-white" href="/login/logout">Sair</a>
       </li>
     <% } else { %>
       <li class="nav-item">
-        <a class="nav-link text-white" href="/login/index">Entrar</a>
+        <a class="nav-link text-white" href="/">Entrar</a>
       </li>
       <% } %>
 

@@ -1,0 +1,108 @@
+html, body {
+    background-color: #D9E5F4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+  }
+
+.blocos{
+    display: flex;
+    align-items: center;
+}
+
+.totalQuantidade{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+/*CADASTRO*/
+.cadastroColunas label{
+margin-top: 20px;
+}
+
+.dadosDaInscricao{
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.container h1, .dadosDaInscricao h1{
+    margin-top: 10px;
+    text-align: center;
+
+}
+
+.formCheckConselhos{
+ padding: 10px;
+
+}
+
+.dadosFinanceiros{
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.dadosFinanceiros label{
+    margin-top: 20px;
+}
+
+.botaoCadastro{
+margin: 0 20px;
+padding: 10px;
+
+}
+
+.botoes{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+}
+
+
+
+/*PESQUISAR*/
+
+.statusBusca{
+    margin: 10px;
+}
+html, body {
+    background-color: #D9E5F4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+  }
+
+  a {
+    color: #92badd;
+    display:inline-block;
+    text-decoration: none;
+    font-weight: 400;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display:inline-block;
+    margin: 40px 8px 10px 8px; 
+  }
+ 
+
+.blocos{
+    display: flex;
+    align-items: center;
+}
+
+.totalQuantidade{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+

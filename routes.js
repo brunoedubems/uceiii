@@ -3,12 +3,12 @@ const route = express.Router();
 
 const homeController = require('./src/controllers/homeController');
 const loginController = require('./src/controllers/loginController');
-const contatoController = require('./src/controllers/contatoController');
-
+const agricultoresController = require('./src/controllers/agricultoresController');
+const BuscarController = require('./src/controllers/buscarController');
 const { loginRequired } = require('./src/middlewares/middleware');
 
 // Rotas da home
-route.get('/', homeController.index);
+route.get('/', homeController.login);
 
 // Rotas de login
 route.get('/login/index', loginController.index);
@@ -16,14 +16,14 @@ route.post('/login/login', loginController.login);
 route.get('/login/logout', loginController.logout);
 
 //registra associação ou usuario
-route.get('/contato', loginRequired, contatoController.index);
-route.post('/contato/register', loginRequired, contatoController.register);
+route.get('/cadastrar', loginRequired, agricultoresController.index);
+route.post('/cadastrar/register', loginRequired, agricultoresController.register);
 
 //buscar
-route.get('/buscar', loginRequired, contatoController.buscar);
-route.get('/contato/index/:id', loginRequired, contatoController.editIndex);
-route.post('/contato/edit/:id', loginRequired, contatoController.edit);
-route.get('/contato/delete/:id', loginRequired, contatoController.delete);
+route.get('/buscar', loginRequired, BuscarController.buscar);
+route.get('/cadastrar/index/:id', loginRequired, agricultoresController.editIndex);
+route.post('/cadastrar/edit/:id', loginRequired, agricultoresController.edit);
+route.get('/agricultores/delete/:id', loginRequired, agricultoresController.delete);
 
 
 //registra usuarios

@@ -1,42 +1,26 @@
 <%- include('includes/head') %>
-<%- include('includes/nav') %>
+<link rel="stylesheet" href="/styles/login.css">
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-2"></div>
+<div class="containnerMenu containnerPrincipal">
 
-    <div class="col-lg-8 my-3">
+  <div class="col-lg-4 my-4">
+    <%- include('includes/messages'); %>
 
-      <%- include('includes/messages'); %>
-      <div class="row">
-        <div class="col-lg my-5">
-          <h4>Faça seu login</h4>
+  </div>
 
-          <p>Se você já tem uma conta, faça login abaixo:</p>
+  <div id="formContent">
+     <div class="fadeIn first">
+        <img src="/img/LogoCMAS.svg" id="logo" alt="logo do CMAS" />
+     </div>
 
-          <form class="form-login" action="/login/login" method="POST">
-            <img src=test alt="logooo">
-            <input type="hidden" name="_csrf" value=<%= csrfToken %>>
-            <div class="form-group">
-              <label>Seu e-mail</label>
-              <input type="email" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-              <label>Sua senha</label>
-              <input type="password" class="form-control" name="password">
-            </div>
-            <button type="submit" class="btn btn-primary">Entrar</button>
-          </form>
+      <form class="form-cadastro form-login" action="/login/login" method="POST">
+        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+        <div class="form-group">
+            <input type="text" id="login" class="inputLogin" name="email" placeholder="Login">
+            <input type="password" id="password" class="inputLogin" name="password" placeholder="Senha">
+          </div>
+          <button type="submit" class="btn btn-primary buttonLogin">Entrar</button>
+     </form>
 
-          
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="col-lg-2"></div>
   </div>
 </div>
-
-<%- include('includes/footer') %>
