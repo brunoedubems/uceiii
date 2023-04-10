@@ -7,7 +7,11 @@ exports.index = (req, res) => {
     return res.render('login');
   };
   
- exports.register = async function(req, res) {
+exports.indexCadastrar = (req, res) => {
+    return res.render('loginCadastrar');
+  };
+  
+ exports.registerLogin = async function(req, res) {
     try {
         const login = new Login(req.body);
         await login.register(); // registra e valida os campos
@@ -15,14 +19,14 @@ exports.index = (req, res) => {
         if(login.errors.length > 0) {
             req.flash('errors', login.errors);
             req.session.save(function() {
-                    return res.redirect('/login/index');
+                    return res.redirect('/loginCadastrar');
             });
             return;
         }
         //quando o usuario for criado com sucesso
         req.flash('success', 'Seu usuário foi criado com sucesso.');
         req.session.save(function() {
-           return res.redirect('/login/index');
+           return res.redirect('/loginCadastrar');
         });
         //return res.send(login.errors);
     } catch(e) {
@@ -47,7 +51,7 @@ exports.login = async function(req, res) {
             req.flash('success', 'Você entrou no sistema.');
             req.session.user = login.user; 
             req.session.save(function() {
-               return res.redirect('/login/index');
+               return res.redirect('/');
             });
             //return res.send(login.errors);
         } catch(e) {

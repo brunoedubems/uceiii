@@ -1,4 +1,4 @@
-const Agricultores = require('../models/AgricultoresModel');
+const Agricultores = require('../models/CadastrarModel');
 //
 exports.index = (req, res) => {
     res.render('cadastrar', {
@@ -13,13 +13,12 @@ exports.register = async(req, res) => {
         
         if(agricultores.errors.length > 0) {
             req.flash('errors', agricultores.errors);
-            req.session.save(() => res.redirect('/cadastrar'));
+            req.session.save(() => res.redirect('/'));
             return;
         }
     
         req.flash('success', 'Agricultor registrado com sucesso!');
-        req.session.save(() => res.redirect(`/cadastrar/index/${agricultores.agricultores._id}`))
-        // req.session.save(() => res.redirect(`/cadastrar/index/${agricultores.agricultores._id}`))
+        req.session.save(() => res.redirect(`cadastrar/${agricultores.agricultores._id}`))
         return ;
     } catch(e) {
         console.log(e);
@@ -40,17 +39,18 @@ exports.edit = async(req, res) => {
     try {
         if(!req.params.id) return res.render('404'); 
         const agricultores = new Agricultores(req.body);
-        await agricultores.edit(req.params.id);
+
+        await agricultores.edit(req.params.id); //função do model
     
         if(agricultores.errors.length > 0) {
             req.flash('errors', agricultores.errors);
-            req.session.save(() => res.redirect('/cadastrar'));
+            req.session.save(() => res.redirect('cadastrar'));
             return;
         }
     
-        req.flash('success', 'Agricultores editado com sucesso');
-        req.session.save(() => res.redirect(`/cadastrar/index/${agricultores.agricultores._id}`));
-        return;
+        req.flash('success', 'Agricultor editado com sucesso!');
+        req.session.save(() => res.redirect(`cadastrar/${agricultores.agricultores._id}`))
+        return ;
     } catch(e) {
         console.log(e);
         return res.render('404');
@@ -64,6 +64,8 @@ exports.delete = async (req, res) => {
     if(!agricultores) return res.render('404');
  
     req.flash('success', 'Agricultores apagado com sucesso');
-    req.session.save(() => res.redirect('back'));
+    req.session.save(() => res.redirect('/buscar'));
     return;
  };
+
+ 

@@ -5,15 +5,10 @@ exports.middlewareGlobal = (req, res, next) => {
   next();
 };
 
-exports.outroMiddleware = (req, res, next) => {
-  next();
-};
-
 exports.checkCsrfError = (err, req, res, next) => {
   if(err) {
     return res.render('404');
   }
-
   next();
 };
 
@@ -25,7 +20,7 @@ exports.csrfMiddleware = (req, res, next) => {
 exports.loginRequired = (req, res, next) => {
   if(!req.session.user) {
     req.flash('errors', 'Você precisa fazer o Login');
-    req.session.save(() => res.redirect('/'));
+    req.session.save(() => res.redirect('login/index'));
     return;
   }
 

@@ -19,31 +19,26 @@
     </div>
     
 
-<%- include('includes/messages')%>
-
-<% if(agricultores.length > 0 ) { %> 
+<!-- <%- include('includes/messages')%> -->
+<% if(totalAgricultores.length > 0 ) { %> 
       <div class="responsive-table">
         <table class="table my-3">
           <thead>
             <tr>
+              <th scope="col">Cpf/cnpj:</th>
                <th scope="col">Nome:</th>
-               <th scope="col">Cpf:</th>
                <th scope="col">Nome Fantasia:</th>
-               <th scope="col">CNPJ:</th>
                <th scope="col">Visita:</th>
-               <th scope="col" colspan="2">status:</th>
-               <th scope="col" >Config:</th>
+               <th scope="col" colspan="2">Config:</th>
             </tr>
-          <% agricultores.forEach(agricultores => { %>
+          <% totalAgricultores.forEach(agricultor => { %>
             <tr>
-              <td><%= agricultores.nome %> </td>
-              <td><%= agricultores.cpf %> </td>
-              <td><%= agricultores.nomeFantasia %> </td>
-              <td><%= agricultores.cpnj %> </td>
-              <td><%= agricultores.statusDeVisita %> </td>
-              <td><%= agricultores.dataDeVisita %> </td>
-              <td><a href="/cadastrar/index/<%= agricultores._id %> ">Editar</td>
-              <td><a class="text-danger" href="/agricultores/delete/<%= agricultores._id %> ">Excluir</td>
+              <td><%= agricultor.cnpjCpf %> </td>
+              <td><%= agricultor.nome %> </td>
+              <td><%= agricultor.nomeFantasia %> </td>
+              <td><%= agricultor.statusDeVisita %> </td>
+              <td><a href="cadastrar/<%= agricultor._id %> ">Editar</td>
+              <td><a class="text-danger" href="buscar/<%= agricultor._id %> ">Excluir</td>
             </tr>
           <% }); %> 
         </table>

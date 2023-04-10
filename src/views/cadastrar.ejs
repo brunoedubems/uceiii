@@ -12,9 +12,9 @@
 <%- include('includes/messages') %>
 
 <% if(agricultores._id) { %> 
-<form action="/cadastrar/edit/<%= agricultores._id %>" method="POST" class="needs-validation" novalidate>
+<form action="/<%=agricultores._id%>" method="POST" class="needs-validation" novalidate>
   <% } else { %> 
-    <form action="/cadastrar/register" method="POST" class="needs-validation" novalidate> 
+    <form action="cadastrar" method="POST" class="needs-validation" novalidate> 
   <% } %> 
   <input type="hidden" name="_csrf" value=<%= csrfToken %>>
 
@@ -27,12 +27,7 @@
           </div>
           <label for="nome">Nome:*</label>
           <input type="text" value="<%= agricultores.nome %>" class="form-control" id="nome" name="nome" required>
-          <div class="valid-tooltip">
-            validado!
-          </div>
-          <div class="invalid-tooltip">
-            Favor coloque um nome!
-          </div>
+
           <label for="dataDeNascimento">Data de Nascimento:</label>
           <input type="text" value="<%= agricultores.dataDeNascimento %>" class="form-control" id="dataDeNascimento"  name="dataDeNascimento">
 
@@ -45,7 +40,7 @@
           <label for="numero">Numero:</label>
           <input type="text" value="<%= agricultores.numero %>" class="form-control" id="numero" name="numero">
 
-          <label for="inscricaoEstadual">Inscrição Estadual:*</label>
+          <label for="inscricaoEstadual">Inscrição Estadual:</label>
           <input type="text" value="<%= agricultores.inscricaoEstadual %>" class="form-control" id="inscricaoEstadual" name="inscricaoEstadual">
 
           <label for="email">Email:</label>
@@ -90,7 +85,7 @@
   
     <div class="botoes">
        <button type="submit" class="btn btn-primary col-md-3 mt-3 botaoCadastro">Salvar</button>
-       <button class="btn btn-primary col-md-3 mt-3 botaoCadastro" href="/login/index">Cancelar</button>
+       <button class="btn btn-primary col-md-3 mt-3 botaoCadastro" href="/">Cancelar</button>
     </div>
 </form>
 

@@ -6,15 +6,15 @@ const AgricultoresSchema = new mongoose.Schema({
   nome: { type: String, required: false, default: '' },
   dataDeNascimento: { type: String, required: false, default: '' },
   rg: { type: String, required: false, default: '' },
-  endereco: { type: String, required: false, default: '' },
+  endereco: { type: String, required: true, default: '' },
   inscricaoEstadual: { type: String, required: false, default: '' },
   email: { type: String, required: false, default: '' },
-  telefone: { type: String, required: false, default: '' },
+  telefone: { type: String, required: true, default: '' },
   cnae: { type: String, required: false, default: '' },
   cnpjMatriz: { type: String, required: false, default: '' },
   nomeFantasia: { type: String, required: false, default: '' },
   nomePresidente: { type: String, required: false, default: ' ' },
-  numeroDaPasta: { type: String, required: false, default: '' },
+  numeroDaPasta: { type: String, required: true, default: '' },
   dataDeVisita: { type: String, required: false, default: '' },
   dataDeAbertura: { type: String, required: false, default: '' },
   dataMandato: { type: String, required: false, default: '' },
@@ -23,7 +23,7 @@ const AgricultoresSchema = new mongoose.Schema({
   criadoEm: { type: Date, default: Date.now }
 });
 
-const AgricultoresModel = mongoose.model('Agricultores', AgricultoresSchema);
+const AgricultoresModel = mongoose.model('agricultores', AgricultoresSchema);
 
 function Agricultores(body) {
 this.body = body; 
@@ -37,9 +37,25 @@ Agricultores.prototype.register = async function() {
   this.agricultores = await AgricultoresModel.create(this.body);
 };
 
-Agricultores.prototype.valida = function() {
+Agricultores.prototype.valida = function() { // VALIDAÇÃO DO FORMULÁRIO
   this.cleanUp();
-if(!this.body.cnpjCpf) this.errors.push("cpf é um campo obrigatorio")
+
+//valida cnpj ou cpf
+if (!this.body.cnpjCpf) {
+  this.errors.push("O campo 'CPF ou CNPJ' é obrigatório.");
+} else if (this.body.cnpjCpf.length === 11) { // Valida CPF
+  if (!cpfValidate(this.body.cnpjCpf)) {
+    this.errors.push("CPF inválido.");
+  }
+} else if (this.body.cnpjCpf.length === 14) { // Valida CNPJ
+  if (!cnpjValidate(this.body.cnpjCpf)) {
+    this.errors.push("CNPJ inválido.");
+  }
+} else {
+  this.errors.push("O campo 'CPF ou CNPJ' deve ter 11 ou 14 caracteres.");
+}
+
+
 };
 
 Agricultores.prototype.cleanUp = function() {
@@ -74,23 +90,28 @@ Agricultores.prototype.cleanUp = function() {
 Agricultores.prototype.edit = async function(id){
   if(typeof id !== 'string') return;
   this.valida();
-  if(this.erros.length > 0) return;
-  this.agricultores = await AgricultoresModel.findByIdUpdate(id, this.body, { new: true });
+  if(this.errors.length > 0) return;
+  this.agricultores = await AgricultoresModel.findByIdAndUpdate(id, this.body, { new: true });
 };
 
-//metodos estáticos
+//Da pagina buscar 
 Agricultores.buscaPorId = async function(id) {
   if(typeof id !== 'string') return;
-const user = await AgricultoresModel.findById(id);
-return user;
+const agricultores = await AgricultoresModel.findById(id);
+return agricultores;
 }
 
-Agricultores.busca = async function(id) {
-const agricultores = await AgricultoresModel.find()
+Agricultores.buscaAgricultores = async function() { // busca os agricultores todos
+const agricultores = await AgricultoresModel.find() //pode filtrar qualquer contato
 .sort({ criadoEM: -1 });  //1 PARA ORDEM CRESCENTE -- 2 PARA DECRESCENTE
 return agricultores;
 }
 
+Agricultores.buscaTotalAgricultores = async function() {
+  const total = await AgricultoresModel.countDocuments();
+  return total;
+}
+ 
 Agricultores.delete = async function(id) {
   if(typeof id !== 'string') return;
 const agricultores = await AgricultoresModel.findOneAndDelete({_id: id});

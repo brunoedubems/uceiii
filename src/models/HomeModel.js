@@ -1,14 +1,10 @@
 const mongoose = require('mongoose');
 
-const HomeSchema = new mongoose.Schema({
-  titulo: { type: String, required: true },
-  descricao: String
-});
+const AgricultoresModel = mongoose.model('agricultores', AgricultoresSchema);
 
-const HomeModel = mongoose.model('Home', HomeSchema);
-
-class Home {
-
+Agricultores.buscaTotalAgricultores = async function() {
+  const total = await AgricultoresModel.countDocuments();
+  return total;
 }
-
+ 
 module.exports = Home;

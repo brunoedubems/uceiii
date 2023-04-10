@@ -1,11 +1,12 @@
-const Agricultores = require('../models/AgricultoresModel');
+const Agricultores = require('../models/CadastrarModel');
 
-exports.index = async (req, res) => {
-  const agricultores = await Agricultores.buscaAgricultores();
-  res.render('buscar', { agricultores });
+exports.home = async (req, res) => {
+  try {
+    const agricultores = await Agricultores.buscaAgricultores();
+    const totalAgricultores =  await agricultores.length;
+    res.render("home", { totalAgricultores });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-exports.login = async (req, res) => {
-  const agricultores = await Agricultores.buscaAgricultores();
-  res.render('login', { agricultores });
-};
